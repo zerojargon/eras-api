@@ -1,8 +1,9 @@
 'use strict';
 
+const config = require('dotenv').config();
 const Hapi = require('hapi');
 const routes = require('./src/routes');
-const Boom = require('boom');
+const authConfig = require('./src/utils/auth.js');
 
 const server = new Hapi.Server()
 server.connection({
@@ -22,10 +23,15 @@ let goodOptions = {
   }
 }
 
-server.register({
+server.register([{
   register: require('good'),
   options: goodOptions
-}, err => {
+},
+require('hapi-auth-jwt2')
+], err => {
+
+  server.auth.strategy('jwt', 'jwt', authConfig);
+  server.auth.default('jwt');
 
   for (const route in routes) {
     server.route(routes[route]);

@@ -1,5 +1,9 @@
-const { product } = require('../../models');
+const { category, product } = require('../../models');
 
 module.exports = (request, reply) => {
-  reply(product.findAll());
+  const output = product.findAll({ include: [
+    { model: category }
+  ]});
+
+  reply(output);
 }

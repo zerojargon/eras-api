@@ -1,9 +1,10 @@
+const { DB_DATABASE, DB_USERNAME, DB_PASS, DB_HOST, DB_PORT } = require('dotenv').config();
 const Sequelize = require('sequelize');
 
 module.exports = {
-  conn: new Sequelize('eras_api', 'eras_api', 'hastings1066', {
-    host: '127.0.0.1',
+  conn: new Sequelize(DB_DATABASE, DB_USERNAME, DB_PASS, {
+    host: DB_HOST,
     dialect: 'mysql',
-    port: 33060
+    port: DB_PORT
   })
 }
