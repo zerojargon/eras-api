@@ -13,4 +13,4 @@ module.exports = database.conn.define('products', {
 }, {
   freezeTableName: true,
   timestamps: false
-})
+});

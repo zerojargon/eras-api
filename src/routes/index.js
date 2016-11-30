@@ -43,6 +43,7 @@ const baseRoutes = [
     method: 'GET',
     path: '/',
     config: {
+      auth: false,
       handler: (request, reply) => {
         reply('This is the index. Go away')
       }
