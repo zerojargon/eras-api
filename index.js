@@ -8,7 +8,7 @@ const authConfig = require('./src/utils/auth.js');
 const server = new Hapi.Server()
 server.connection({
   host: 'localhost',
-  port: 8000
+  port: 8001
 });
 
 let goodOptions = {
