@@ -1,10 +1,9 @@
 const { category, product } = require('../../models');
 
 module.exports = (request, reply) => {
+  const includes = requestHelpers.parseIncludes({ category }, request.query.include);
   const output = product.findOne({
-    include: [
-      { model: category }
-    ],
+    include: includes,
     where: { id: request.params.productId }
   });
 
