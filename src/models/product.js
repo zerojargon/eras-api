@@ -8,9 +8,20 @@ module.exports = database.conn.define('products', {
     primaryKey: true
   },
   name: {
-    type: Sequelize.STRING
-  }
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  stockCode: Sequelize.INTEGER,
+  price: Sequelize.INTEGER,
+  discountedPrice: Sequelize.INTEGER,
+  description: Sequelize.TEXT,
+  primaryImageId: Sequelize.INTEGER,
+  width: Sequelize.INTEGER,
+  height: Sequelize.INTEGER,
+  depth: Sequelize.INTEGER,
+  publishedAt: Sequelize.DATE
 }, {
   freezeTableName: true,
-  timestamps: false
+  paranoid: true,
+  timestamps: true
 });
