@@ -18,7 +18,13 @@ module.exports = (request, reply) => {
     productToUpdate.publishedAt = request.payload.publishedAt || productToUpdate.publishedAt;
 
     productToUpdate.save().then(savedProduct => {
-      reply(savedProduct);
+      if (request.payload.categoryIds) {
+        savedProduct.setCategories(request.payload.categoryIds).then(linkedProduct => {
+          reply(savedProduct);
+        })
+      } else {
+        reply(savedProduct);
+      }
     });
   })
 }

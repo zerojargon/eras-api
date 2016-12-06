@@ -17,9 +17,9 @@
     "good-console": "^6.3.1",
     "good-squeeze": "^5.0.1",
     "hapi": "^16.0.1",
-    "hapi-auth-jwt2": "^7.2.3",
-    "joi": "^10.0.2",
-    "jsonwebtoken": "^7.1.9",
+    "hapi-auth-jwt2": "^7.2.4",
+    "joi": "^10.0.5",
+    "jsonwebtoken": "^7.2.0",
     "mysql": "^2.12.0",
     "sequelize": "^3.27.0"
   }
