@@ -1,5 +1,6 @@
+const categoryRoutes = require('./categories');
 const productRoutes = require('./products');
-const userRoutes = require('./users');
+const userRoutes = require('./users')
 const Boom = require('boom');
 const crypto = require('crypto');
 const Joi = require('joi');
@@ -90,6 +91,7 @@ const baseRoutes = [
 
 module.exports = [
   ...baseRoutes,
+  ...categoryRoutes,
   ...productRoutes,
   ...userRoutes
 ];
