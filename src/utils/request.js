@@ -10,5 +10,14 @@ module.exports = {
           return allowedIncludes[include];
         })
     ];
+  },
+  parseOrder: (orderProps = ['id'], orderDirections = []) => {
+    return orderProps.map((orderProp, index) => {
+      let orderArray = [orderProp];
+      if (orderDirections[index]) {
+        orderArray.push(orderDirections[index])
+      }
+      return orderArray;
+    });
   }
 }

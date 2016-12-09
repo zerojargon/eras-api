@@ -14,7 +14,19 @@ module.exports = [
     path: '/products',
     config: {
       auth: false,
-      handler: productGet
+      handler: productGet,
+      validate: {
+        query: {
+          limit: Joi.number().integer().min(1).max(500),
+          offset: Joi.number().integer().min(0),
+          orderBy: Joi.array().items(
+            Joi.string().valid(['id', 'name', 'stockCode', 'price', 'discountedPrice', 'publishedAt', 'width', 'height', 'depth'])
+          ).single(),
+          orderDirection: Joi.array().items(
+            Joi.string().valid(['DESC', 'ASC'])
+          ).single()
+        }
+      }
     }
   },
   {

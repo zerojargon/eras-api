@@ -1,4 +1,5 @@
 const { category } = require('../../models');
+const Boom = require('boom');
 
 module.exports = (request, reply) => {
   category.findOne({

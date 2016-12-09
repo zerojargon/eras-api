@@ -14,7 +14,19 @@ module.exports = [
     path: '/categories',
     config: {
       auth: false,
-      handler: categoryGet
+      handler: categoryGet,
+      validate: {
+        query: {
+          limit: Joi.number().integer().min(1).max(500),
+          offset: Joi.number().integer().min(0),
+          orderBy: Joi.array().items(
+            Joi.string().valid(['id', 'name'])
+          ).single(),
+          orderDirection: Joi.array().items(
+            Joi.string().valid(['DESC', 'ASC'])
+          ).single()
+        }
+      }
     }
   },
   {
