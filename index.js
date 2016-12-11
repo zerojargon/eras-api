@@ -3,7 +3,7 @@
 const config = require('dotenv').config();
 const Hapi = require('hapi');
 const routes = require('./src/routes');
-const authConfig = require('./src/utils/auth.js');
+const { auth } = require('./src/utils');
 
 const server = new Hapi.Server()
 server.connection({
@@ -30,7 +30,7 @@ server.register([{
 require('hapi-auth-jwt2')
 ], err => {
 
-  server.auth.strategy('jwt', 'jwt', authConfig);
+  server.auth.strategy('jwt', 'jwt', auth.config);
   server.auth.default('jwt');
 
   for (const route in routes) {
