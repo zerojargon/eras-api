@@ -1,5 +1,5 @@
-const userPost = require('./post');
+const userCreate = require('./create');
 
 module.exports = {
-  userPost
+  userCreate
 };

@@ -1,4 +1,4 @@
-const { userPost } = require('../controllers/users');
+const { userCreate } = require('../controllers/users');
 const { user } = require('../models');
 const Joi = require('joi');
 
@@ -14,7 +14,7 @@ module.exports = [
           password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).max(255).required()
         })
       },
-      handler: userPost
+      handler: userCreate
     }
   }
 ];

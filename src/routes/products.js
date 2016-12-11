@@ -53,7 +53,7 @@ module.exports = [
           width: Joi.number().integer().min(0),
           height: Joi.number().integer().min(0),
           depth: Joi.number().integer().min(0),
-          publishedAt: Joi.date().min('now'),
+          publishedAt: Joi.date(),
           categoryIds: Joi.array().items(Joi.number().integer().min(0))
         }
       }
@@ -75,7 +75,7 @@ module.exports = [
           width: Joi.number().integer().min(0),
           height: Joi.number().integer().min(0),
           depth: Joi.number().integer().min(0),
-          publishedAt: Joi.date().min('now'),
+          publishedAt: Joi.date(),
           categoryIds: Joi.array().items(Joi.number().integer().min(0))
         }
       }

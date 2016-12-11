@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const config = require('dotenv').config();
 
 const categoryRoutes = require('./categories');
+const imageRoutes = require('./images');
 const productRoutes = require('./products');
 const userRoutes = require('./users')
 
@@ -72,6 +73,7 @@ const baseRoutes = [
 module.exports = [
   ...baseRoutes,
   ...categoryRoutes,
+  ...imageRoutes,
   ...productRoutes,
   ...userRoutes
 ];

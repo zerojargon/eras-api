@@ -27,7 +27,8 @@ server.register([{
   register: require('good'),
   options: goodOptions
 },
-require('hapi-auth-jwt2')
+require('hapi-auth-jwt2'),
+require('inert')
 ], err => {
 
   server.auth.strategy('jwt', 'jwt', auth.config);

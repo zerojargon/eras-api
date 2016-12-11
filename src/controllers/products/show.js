@@ -1,9 +1,9 @@
-const { category, product } = require('../../models');
+const { category, image, product } = require('../../models');
 const { requestHelpers } = require('../../utils');
 const Boom = require('boom');
 
 module.exports = (request, reply) => {
-  const includes = requestHelpers.parseIncludes({ category }, request.query.include);
+  const includes = requestHelpers.parseIncludes({ category, image }, request.query.include);
   product.findOne({
     include: includes,
     where: { id: request.params.productId }
