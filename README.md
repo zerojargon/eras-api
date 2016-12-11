@@ -145,6 +145,7 @@ Returns a single image. This endpoint creates an image with the dimensions in th
     image*: file, // the image to be uploaded
     productIds: [1, 3] // an array of products to attach the image to
   }
+```
 
 ## Issues
 
