@@ -24,7 +24,9 @@ module.exports = [
           ).single(),
           orderDirection: Joi.array().items(
             Joi.string().valid(['DESC', 'ASC'])
-          ).single()
+          ).single(),
+          includeDeleted: Joi.string().allow(['true', 'false']).lowercase(),
+          includeDrafts: Joi.string().allow(['true', 'false']).lowercase()
         }
       }
     }
