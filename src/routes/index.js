@@ -1,7 +1,6 @@
 const Boom = require('boom');
 const Joi = require('joi');
 const jwt = require('jsonwebtoken');
-const config = require('dotenv').config();
 
 const categoryRoutes = require('./categories');
 const imageRoutes = require('./images');
@@ -9,7 +8,7 @@ const productRoutes = require('./products');
 const userRoutes = require('./users')
 
 const { user } = require('../models');
-const { auth } = require('../utils');
+const { auth, config } = require('../utils');
 
 const baseRoutes = [
   {

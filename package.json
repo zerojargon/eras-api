@@ -1,6 +1,6 @@
 {
   "name": "eras-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "API for Eras of Style",
   "main": "index.js",
   "scripts": {

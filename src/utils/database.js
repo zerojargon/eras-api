@@ -1,4 +1,4 @@
-const { DB_DATABASE, DB_USERNAME, DB_PASS, DB_HOST, DB_PORT } = require('dotenv').config();
+const { DB_DATABASE, DB_USERNAME, DB_PASS, DB_HOST, DB_PORT } = require('./config');
 const Sequelize = require('sequelize');
 
 module.exports = {

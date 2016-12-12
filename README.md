@@ -69,7 +69,7 @@ Creates a product
   payload: {
     name*: 'productName',
     stockCode: 'ABC01',
-    price: '10000', // prices are inserted in pence
+    price: 10000, // prices are inserted in pence
     discountedPrice: 8000,
     description: 'Awesome product you probably want',
     primaryImageId: 1,
