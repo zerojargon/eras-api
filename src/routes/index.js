@@ -62,7 +62,7 @@ const baseRoutes = [
             reply(Boom.unauthorized('invalid credentials'));
           }
         }).catch(error => {
-          reply(error);
+          reply(Boom.unauthorized('invalid email address'));
         })
       }
     }
