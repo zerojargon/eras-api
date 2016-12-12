@@ -5,16 +5,29 @@ const Boom = require('boom');
 module.exports = (request, reply) => {
   const includes = requestHelpers.parseIncludes({ category }, request.query.include);
   const order = requestHelpers.parseOrder(request.query.orderBy, request.query.orderDirection);
-  product.findAll({
-    include: includes,
-    limit: request.query.limit || 25,
-    offset: request.query.offset || 0,
-    order: order
-  })
-    .then(productList => {
-      reply(productList);
+  request.server.auth.test('jwt', request, (err, credentials) => {
+    const paranoid = (err || request.query.includeDeleted !== 'true');
+
+    let whereClauses = {};
+    if (err || request.query.includeDrafts !== 'true') {
+      whereClauses.publishedAt = {
+        $lte: new Date()
+      }
+    }
+
+    product.findAll({
+      where: whereClauses,
+      include: includes,
+      limit: request.query.limit || 25,
+      offset: request.query.offset || 0,
+      order: order,
+      paranoid: paranoid
     })
-    .catch(err => {
-      reply(Boom.badImplementation('Could not retrieve products'));
-    });
+      .then(productList => {
+        reply(productList);
+      })
+      .catch(err => {
+        reply(Boom.badImplementation('Could not retrieve products'));
+      });
+  });
 }
