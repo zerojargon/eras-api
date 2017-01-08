@@ -7,11 +7,11 @@ const categoryProduct = require('./categoryProduct');
 const imageProduct = require('./imageProduct');
 
 // build relationships
-category.belongsToMany(product, { through: categoryProduct });
-product.belongsToMany(category, { through: categoryProduct });
+category.belongsToMany(product, { through: categoryProduct, as: 'product' });
+product.belongsToMany(category, { through: categoryProduct, as: 'category' });
 
-image.belongsToMany(product, { through: imageProduct });
-product.belongsToMany(image, { through: imageProduct });
+image.belongsToMany(product, { through: imageProduct, as: 'product' });
+product.belongsToMany(image, { through: imageProduct, as: 'image' });
 
 module.exports = {
   category,

@@ -1,9 +1,9 @@
-const { category } = require('../../models');
+const { category, product, image } = require('../../models');
 const { requestHelpers } = require('../../utils');
 const Boom = require('boom');
 
 module.exports = (request, reply) => {
-  const includes = requestHelpers.parseIncludes({}, request.query.include);
+  const includes = requestHelpers.parseIncludes({ product, image }, request.query.include);
   const orderProperty = request.query.orderBy || 'id';
   const order = (request.query.orderBy) ? request.query.orderBy.map((orderProp, index) => {
     let orderArray = [orderProp];

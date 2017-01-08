@@ -17,6 +17,7 @@ module.exports = [
       handler: categoryGet,
       validate: {
         query: {
+          include: Joi.string(),
           limit: Joi.number().integer().min(1).max(500),
           offset: Joi.number().integer().min(0),
           orderBy: Joi.array().items(

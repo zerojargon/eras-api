@@ -22,6 +22,7 @@ module.exports = [
           orderBy: Joi.array().items(
             Joi.string().valid(['id', 'name', 'stockCode', 'price', 'discountedPrice', 'publishedAt', 'width', 'height', 'depth'])
           ).single(),
+          include: Joi.string(),
           orderDirection: Joi.array().items(
             Joi.string().valid(['DESC', 'ASC'])
           ).single(),
