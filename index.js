@@ -1,6 +1,6 @@
 'use strict';
 
-const config = require('dotenv').config();
+const config = require('dotenv').config({path: __dirname + '/.env'});
 const Hapi = require('hapi');
 const routes = require('./src/routes');
 const { auth } = require('./src/utils');
