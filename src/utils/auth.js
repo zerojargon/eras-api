@@ -1,4 +1,3 @@
-const { AUTH_KEY } = require('dotenv').config();
 const Sequelize = require('sequelize');
 const crypto = require('crypto');
 
@@ -41,10 +40,12 @@ const validateString = (string, salt, encrytedString) => {
 }
 
 module.exports = {
-  config: {
-    key: AUTH_KEY,
-    validateFunc: validate,
-    verifyOptions: { algorithms: [ 'HS256' ] }
+  buildConfig: function(authKey) {
+    return {
+      key: authKey,
+      validateFunc: validate,
+      verifyOptions: { algorithms: [ 'HS256' ] }
+    }
   },
   encrypt: saltHashString,
   validateString: validateString
