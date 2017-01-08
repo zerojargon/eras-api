@@ -67,7 +67,20 @@ module.exports = [
     path: '/categories/{categoryId}',
     config: {
       auth: false,
-      handler: categoryDelete
+      handler: categoryDelete,
+      validate: {
+        query: {
+          include: Joi.string(),
+          limit: Joi.number().integer().min(1).max(500),
+          offset: Joi.number().integer().min(0),
+          orderBy: Joi.array().items(
+            Joi.string().valid(['id', 'name'])
+          ).single(),
+          orderDirection: Joi.array().items(
+            Joi.string().valid(['DESC', 'ASC'])
+          ).single()
+        }
+      }
     }
   }
 ];
