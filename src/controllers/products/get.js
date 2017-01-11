@@ -13,6 +13,13 @@ module.exports = (request, reply) => {
       whereClauses.publishedAt = {
         $lte: new Date()
       }
+    } else if (request.query.includeDrafts) {
+      whereClauses.publishedAt = {
+        $or: [
+          { $lte: new Date() },
+          null
+        ]
+      }
     }
 
     product.findAll({
