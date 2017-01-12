@@ -29,7 +29,6 @@ const addImages = function(request, originalProduct) {
     };
 
     let uploadedFiles = 0;
-    console.log(originalProduct.id);
     for (const imageUpload of images) {
       image.create().then(createdImage => {
         createdImage.addProduct(originalProduct.id)
@@ -76,7 +75,6 @@ module.exports = (request, reply) => {
         // add categories
         .then( addCategories.bind(null, request) )
         .then( function(res) {
-          console.log('---', res);
           reply(res);
         });
     })
