@@ -45,6 +45,11 @@ module.exports = [
     path: '/products',
     config: {
       handler: productCreate,
+      payload: {
+        output: 'stream',
+        parse: true,
+        allow: 'multipart/form-data'
+      },
       validate: {
         payload: {
           name: Joi.string().required(),
@@ -57,7 +62,10 @@ module.exports = [
           height: Joi.number().integer().min(0),
           depth: Joi.number().integer().min(0),
           publishedAt: Joi.date(),
-          categoryIds: Joi.array().items(Joi.number().integer().min(0))
+          categoryIds: Joi.array().items(Joi.number().integer().min(0)),
+          images: Joi.array().items(Joi.object({
+            pipe: Joi.func().required()
+          }).unknown()).single(),
         }
       }
     }
