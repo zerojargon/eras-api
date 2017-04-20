@@ -1,6 +1,5 @@
-const { imageCreate, imageShow } = require('../controllers/images');
-const { image } = require('../models');
-const Joi = require('joi');
+const { imageCreate, imageShow } = require('../controllers/images')
+const Joi = require('joi')
 
 module.exports = [
   {
@@ -38,4 +37,4 @@ module.exports = [
       handler: imageCreate
     }
   }
-];
+]

@@ -1,6 +1,6 @@
-const categoryGet = require('./get');
-const { category } = require('../../models');
-const Boom = require('boom');
+const categoryGet = require('./get')
+const { category } = require('../../models')
+const Boom = require('boom')
 
 module.exports = (request, reply) => {
   category.findOne({
@@ -11,13 +11,13 @@ module.exports = (request, reply) => {
     .then(categoryToDestroy => {
       categoryToDestroy.destroy()
         .then(destroyedProduct => {
-          categoryGet(request, reply);
+          categoryGet(request, reply)
         })
         .catch(err => {
-          reply(Boom.badImplementation('The category could not be destroyed'));
-        });
+          reply(Boom.badImplementation('The category could not be destroyed', err))
+        })
     })
     .catch(err => {
-      reply(Boom.notFound());
-    });
+      reply(Boom.notFound('Not found', err))
+    })
 }

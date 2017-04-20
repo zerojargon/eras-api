@@ -1,38 +1,41 @@
-const { image } = require('../../models');
-const fs = require('fs');
-const path = require('path');
-const Boom = require('boom');
-const appDir = path.dirname(require.main.filename);
+const { image } = require('../../models')
+const fs = require('fs')
+const path = require('path')
+const Boom = require('boom')
+const appDir = path.dirname(require.main.filename)
 
 module.exports = (request, reply) => {
-  const data = request.payload;
+  const data = request.payload
   if (data.image) {
     image.create().then(createdImage => {
-      const name = `${createdImage.id}-original`;
-      const path = appDir + "/storage/" + name;
-      const file = fs.createWriteStream(path);
+      const name = `${createdImage.id}-original`
+      const path = appDir + '/storage/' + name
+      const file = fs.createWriteStream(path)
 
       file.on('error', function (err) {
         console.error(err)
-      });
+      })
 
-      data.image.pipe(file);
+      data.image.pipe(file)
 
       data.image.on('end', function (err) {
+        if (err) {
+          reply(Boom.badImplementation('Could not create image ', err))
+        }
         if (request.payload.productIds) {
           createdImage.addProducts(request.payload.productIds)
             .then(linkedProduct => {
-              reply(createdImage);
+              reply(createdImage)
             })
-            .catch(err => {
-              reply(Boom.badImplementation('Could not add products to image ' + createdImage.id));
-            });
+            .catch(createErr => {
+              reply(Boom.badImplementation('Could not add products to image ' + createdImage.id, createErr))
+            })
         } else {
-          reply(createdImage);
+          reply(createdImage)
         }
       })
-    }).catch(err => reply(err));
+    }).catch(err => reply(Boom.badImplementation('Could not create image ', err)))
   } else {
-      reply()
+    reply(Boom.badRequest('Image not included or parsed correctly'))
   }
 }

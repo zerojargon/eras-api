@@ -1,14 +1,14 @@
-const { category, image, product } = require('../../models');
-const { requestHelpers } = require('../../utils');
-const Boom = require('boom');
+const { category, image, product } = require('../../models')
+const { requestHelpers } = require('../../utils')
+const Boom = require('boom')
 
 module.exports = (request, reply) => {
-  const includes = requestHelpers.parseIncludes({ category, image }, request.query.include);
-  const order = requestHelpers.parseOrder(request.query.orderBy, request.query.orderDirection);
+  const includes = requestHelpers.parseIncludes({ category, image }, request.query.include)
+  const order = requestHelpers.parseOrder(request.query.orderBy, request.query.orderDirection)
   request.server.auth.test('jwt', request, (err, credentials) => {
-    const paranoid = (err || request.query.includeDeleted !== 'true');
+    const paranoid = (err || request.query.includeDeleted !== 'true')
 
-    let whereClauses = {};
+    let whereClauses = {}
     if (err || request.query.includeDrafts !== 'true') {
       whereClauses.publishedAt = {
         $lte: new Date()
@@ -31,10 +31,10 @@ module.exports = (request, reply) => {
       paranoid: paranoid
     })
       .then(productList => {
-        reply(productList);
+        reply(productList)
       })
       .catch(err => {
-        reply(Boom.badImplementation('Could not retrieve products'));
-      });
-  });
+        reply(Boom.badImplementation('Could not retrieve products', err))
+      })
+  })
 }

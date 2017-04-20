@@ -1,5 +1,5 @@
-const userCreate = require('./create');
+const userCreate = require('./create')
 
 module.exports = {
   userCreate
-};
+}

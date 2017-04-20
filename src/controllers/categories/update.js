@@ -1,5 +1,5 @@
-const { category } = require('../../models');
-const Boom = require('boom');
+const { category } = require('../../models')
+const Boom = require('boom')
 
 module.exports = (request, reply) => {
   category.findOne({
@@ -8,17 +8,17 @@ module.exports = (request, reply) => {
     }
   })
     .then(categoryToUpdate => {
-      categoryToUpdate.name = request.payload.name || categoryToUpdate.name;
+      categoryToUpdate.name = request.payload.name || categoryToUpdate.name
 
       categoryToUpdate.save()
         .then(savedCategory => {
-          reply(savedCategory);
+          reply(savedCategory)
         })
         .catch(err => {
-          reply(Boom.badImplementation('Could not update category'));
-        });
+          reply(Boom.badImplementation('Could not update category', err))
+        })
     })
     .catch(err => {
-      reply(Boom.notFound());
-    });
+      reply(Boom.notFound('Not Found', err))
+    })
 }

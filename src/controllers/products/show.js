@@ -1,11 +1,11 @@
-const { category, image, product } = require('../../models');
-const { requestHelpers } = require('../../utils');
-const Boom = require('boom');
+const { category, image, product } = require('../../models')
+const { requestHelpers } = require('../../utils')
+const Boom = require('boom')
 
 module.exports = (request, reply) => {
-  const includes = requestHelpers.parseIncludes({ category, image }, request.query.include);
+  const includes = requestHelpers.parseIncludes({ category, image }, request.query.include)
   request.server.auth.test('jwt', request, (err, credentials) => {
-    const paranoid = (err !== null);
+    const paranoid = (err !== null)
     product.findOne({
       include: includes,
       where: { id: request.params.productId },
@@ -13,12 +13,12 @@ module.exports = (request, reply) => {
     })
     .then(foundProduct => {
       if (foundProduct) {
-        return reply(foundProduct);
+        return reply(foundProduct)
       }
-      return reply(Boom.notFound());
+      return reply(Boom.notFound())
     })
     .catch(err => {
-      return reply(Boom.notFound());
-    });
-  });
-};
+      return reply(Boom.notFound('Product not found', err))
+    })
+  })
+}

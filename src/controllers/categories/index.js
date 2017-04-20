@@ -1,8 +1,8 @@
-const categoryGet = require('./get');
-const categoryShow = require('./show');
-const categoryCreate = require('./create');
-const categoryUpdate = require('./update');
-const categoryDelete = require('./delete');
+const categoryGet = require('./get')
+const categoryShow = require('./show')
+const categoryCreate = require('./create')
+const categoryUpdate = require('./update')
+const categoryDelete = require('./delete')
 
 module.exports = {
   categoryGet,
@@ -10,4 +10,4 @@ module.exports = {
   categoryCreate,
   categoryUpdate,
   categoryDelete
-};
+}
