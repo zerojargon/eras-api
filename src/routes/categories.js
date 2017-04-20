@@ -4,9 +4,9 @@ const {
   categoryCreate,
   categoryUpdate,
   categoryDelete
-} = require('../controllers/categories');
+} = require('../controllers/categories')
 
-const Joi = require('joi');
+const Joi = require('joi')
 
 module.exports = [
   {
@@ -83,4 +83,4 @@ module.exports = [
       }
     }
   }
-];
+]

@@ -1,9 +1,8 @@
-const { user } = require('../../models');
-const { auth } = require('../../utils');
+const { user } = require('../../models')
+const { auth } = require('../../utils')
 
 module.exports = (request, reply) => {
-
-  const hashedAuth = auth.encrypt(request.payload.password);
+  const hashedAuth = auth.encrypt(request.payload.password)
 
   user.create({
     email: request.payload.email,
@@ -12,7 +11,6 @@ module.exports = (request, reply) => {
   }).then(newUser => {
     reply(newUser)
   }).catch(err => {
-    reply(err);
-  });
-
+    reply(err)
+  })
 }

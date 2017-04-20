@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize');
-const { database } = require('../utils');
+const Sequelize = require('sequelize')
+const { database } = require('../utils')
 
 module.exports = database.conn.define('users', {
   id: {

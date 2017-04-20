@@ -1,14 +1,15 @@
-const Boom = require('boom');
-const Joi = require('joi');
-const jwt = require('jsonwebtoken');
+const Boom = require('boom')
+const Joi = require('joi')
+const jwt = require('jsonwebtoken')
 
-const categoryRoutes = require('./categories');
-const imageRoutes = require('./images');
-const productRoutes = require('./products');
+const categoryRoutes = require('./categories')
+const enquiryRoutes = require('./enquiries')
+const imageRoutes = require('./images')
+const productRoutes = require('./products')
 const userRoutes = require('./users')
 
-const { user } = require('../models');
-const { auth, config } = require('../utils');
+const { user } = require('../models')
+const { auth, config } = require('../utils')
 
 const baseRoutes = [
   {
@@ -57,22 +58,23 @@ const baseRoutes = [
                 id: currentUser.id,
                 email: currentUser.email
               }
-            });
+            })
           } else {
-            reply(Boom.unauthorized('invalid credentials'));
+            reply(Boom.unauthorized('invalid credentials'))
           }
-        }).catch(error => {
-          reply(Boom.unauthorized('invalid email address'));
+        }).catch(err => {
+          reply(Boom.unauthorized('invalid email address', err))
         })
       }
     }
   }
-];
+]
 
 module.exports = [
   ...baseRoutes,
   ...categoryRoutes,
+  ...enquiryRoutes,
   ...imageRoutes,
   ...productRoutes,
   ...userRoutes
-];
+]

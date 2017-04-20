@@ -1,6 +1,5 @@
-const { userCreate } = require('../controllers/users');
-const { user } = require('../models');
-const Joi = require('joi');
+const { userCreate } = require('../controllers/users')
+const Joi = require('joi')
 
 module.exports = [
   {
@@ -17,4 +16,4 @@ module.exports = [
       handler: userCreate
     }
   }
-];
+]

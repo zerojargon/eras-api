@@ -4,9 +4,9 @@ const {
   productCreate,
   productUpdate,
   productDelete
-} = require('../controllers/products');
+} = require('../controllers/products')
 
-const Joi = require('joi');
+const Joi = require('joi')
 
 module.exports = [
   {
@@ -66,7 +66,7 @@ module.exports = [
           categoryIds: Joi.array().items(Joi.number().integer().min(0)),
           images: Joi.array().items(Joi.object({
             pipe: Joi.func().required()
-          }).unknown()).single(),
+          }).unknown()).single()
         }
       }
     }
@@ -116,4 +116,4 @@ module.exports = [
       }
     }
   }
-];
+]
