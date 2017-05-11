@@ -14,7 +14,7 @@ module.exports = [
       validate: {
         payload: {
           message: Joi.string(),
-          senderAddress: Joi.string().email().required(),
+          email: Joi.string().email().required(),
           productId: Joi.number().integer()
         }
       }
