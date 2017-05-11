@@ -5,7 +5,7 @@ const Boom = require('boom')
 
 module.exports = (request, reply) => {
   const {
-    senderAddress,
+    senderAddress: email,
     message,
     productId = null
   } = request.payload
