@@ -11,15 +11,23 @@ module.exports = (request, reply) => {
     }
     return orderArray
   }) : [['id']]
-  category.findAll({
+  const queryParams = {
     include: includes,
     limit: request.query.limit || 25,
     offset: request.query.offset || 0,
     order: order
-  })
-    .then(categoryList => {
-      reply(categoryList)
-    })
+  }
+
+  category.findAndCountAll(queryParams)
+    .then(categoryList => reply({
+      data: categoryList.rows,
+      meta: {
+        count: categoryList.count,
+        limit: queryParams.limit,
+        offset: queryParams.offset,
+        order: queryParams.order
+      }
+    }))
     .catch(err => {
       reply(Boom.badImplementation('Could not retrieve categories', err))
     })
