@@ -67,10 +67,21 @@ const addCategories = function (request, originalProduct) {
 }
 
 module.exports = (request, reply) => {
-  product.create(request.payload)
+  const productParams = Object.assign({}, request.payload)
+  product.create(productParams)
     .then(createdProduct => {
       // add images
       createdProduct = addImages(request, createdProduct)
+        // use the first image if a primaryImageId isn't passed in
+        .then((productWithImages) => {
+          return new Promise(function (resolve, reject) {
+            if (!productWithImages.primaryImageId && productWithImages.image[0]) {
+              productWithImages.primaryImageId = productWithImages.image[0].id
+              resolve(productWithImages.save())
+            }
+            resolve(productWithImages)
+          })
+        })
         // add categories
         .then(addCategories.bind(null, request))
         .then(function (res) {
