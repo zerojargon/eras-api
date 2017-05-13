@@ -22,17 +22,25 @@ module.exports = (request, reply) => {
       }
     }
 
-    product.findAll({
+    const queryParams = {
       where: whereClauses,
       include: includes,
       limit: request.query.limit || 25,
       offset: request.query.offset || 0,
       order: order,
       paranoid: paranoid
-    })
-      .then(productList => {
-        reply(productList)
-      })
+    }
+
+    product.findAndCountAll(queryParams)
+      .then(productList => reply({
+        data: productList.rows,
+        meta: {
+          count: productList.count,
+          limit: queryParams.limit,
+          offset: queryParams.offset,
+          order: queryParams.order
+        }
+      }))
       .catch(err => {
         reply(Boom.badImplementation('Could not retrieve products', err))
       })
