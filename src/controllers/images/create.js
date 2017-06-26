@@ -23,7 +23,7 @@ module.exports = (request, reply) => {
           reply(Boom.badImplementation('Could not create image ', err))
         }
         if (request.payload.productIds) {
-          createdImage.addProducts(request.payload.productIds)
+          createdImage.addProduct(request.payload.productIds)
             .then(linkedProduct => {
               reply(createdImage)
             })
