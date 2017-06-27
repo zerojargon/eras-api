@@ -1,4 +1,4 @@
-const { imageCreate, imageShow } = require('../controllers/images')
+const { imageCreate, imageDelete, imageShow, imageUpdate } = require('../controllers/images')
 const Joi = require('joi')
 
 module.exports = [
@@ -35,6 +35,26 @@ module.exports = [
         })
       },
       handler: imageCreate
+    }
+  },
+  {
+    method: 'PATCH',
+    path: '/images/{imageId}',
+    config: {
+      handler: imageUpdate,
+      validate: {
+        payload: {
+          productIds: Joi.array().single().items(Joi.number().integer())
+        }
+      }
+    }
+  },
+  {
+    method: 'DELETE',
+    path: '/images/{imageId}',
+    config: {
+      auth: false,
+      handler: imageDelete
     }
   }
 ]
