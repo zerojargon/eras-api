@@ -22,7 +22,7 @@ module.exports = (request, reply) => {
       productToUpdate.save()
         .then(savedProduct => {
           if (request.payload.categoryIds) {
-            savedProduct.setCategories(request.payload.categoryIds)
+            savedProduct.setCategory(request.payload.categoryIds)
               .then(linkedProduct => {
                 reply(savedProduct)
               })
