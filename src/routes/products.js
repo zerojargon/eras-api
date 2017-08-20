@@ -27,7 +27,8 @@ module.exports = [
             Joi.string().valid(['DESC', 'ASC'])
           ).single(),
           includeDeleted: Joi.string().allow(['true', 'false']).lowercase(),
-          includeDrafts: Joi.string().allow(['true', 'false']).lowercase()
+          includeDrafts: Joi.string().allow(['true', 'false']).lowercase(),
+          query: Joi.string()
         }
       }
     }
@@ -106,6 +107,30 @@ module.exports = [
           ).single(),
           includeDeleted: Joi.string().allow(['true', 'false']).lowercase(),
           includeDrafts: Joi.string().allow(['true', 'false']).lowercase()
+        }
+      }
+    }
+  },
+  {
+    method: 'GET',
+    path: '/categories/{categoryId}/products',
+    config: {
+      auth: false,
+      handler: productGet,
+      validate: {
+        query: {
+          limit: Joi.number().integer().min(1).max(500),
+          offset: Joi.number().integer().min(0),
+          orderBy: Joi.array().items(
+            Joi.string().valid(['id', 'name', 'stockCode', 'price', 'discountedPrice', 'publishedAt', 'width', 'height', 'depth'])
+          ).single(),
+          include: Joi.string(),
+          orderDirection: Joi.array().items(
+            Joi.string().valid(['DESC', 'ASC'])
+          ).single(),
+          includeDeleted: Joi.string().allow(['true', 'false']).lowercase(),
+          includeDrafts: Joi.string().allow(['true', 'false']).lowercase(),
+          query: Joi.string()
         }
       }
     }

@@ -1,6 +1,7 @@
 const { category, image, product } = require('../../models')
 const { requestHelpers } = require('../../utils')
 const Boom = require('boom')
+const Sequelize = require('sequelize')
 
 module.exports = (request, reply) => {
   const includes = requestHelpers.parseIncludes({ category, image }, request.query.include)
@@ -9,6 +10,14 @@ module.exports = (request, reply) => {
     const paranoid = (err || request.query.includeDeleted !== 'true')
 
     let whereClauses = {}
+    if (request.params.categoryId) {
+      const categoryInclude = includes.find(include => include.model === category)
+      if (categoryInclude) {
+        categoryInclude.where = {
+          id: request.params.categoryId
+        }
+      }
+    }
     if (err || request.query.includeDrafts !== 'true') {
       whereClauses.publishedAt = {
         $lte: new Date()
@@ -20,6 +29,30 @@ module.exports = (request, reply) => {
           null
         ]
       }
+    }
+
+    if (request.query.query) {
+      const lowerQuery = request.query.query.toLowerCase()
+      whereClauses.$or = [
+        {
+          $and: [
+            Sequelize.where(Sequelize.fn('lower', Sequelize.col('products.name')),
+              {
+                $like: `%${lowerQuery}%`
+              }
+            )
+          ]
+        },
+        {
+          $and: [
+            Sequelize.where(Sequelize.fn('lower', Sequelize.col('products.description')),
+              {
+                $like: `%${lowerQuery}%`
+              }
+            )
+          ]
+        }
+      ]
     }
 
     const queryParams = {

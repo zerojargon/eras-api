@@ -4,7 +4,7 @@ const validate = (decoded, request, callback) => {
   const { user } = require('../models')
   user.findOne({
     where: {
-      id: decoded.id
+      id: decoded.data
     }
   }).then(currentUser => {
     return callback(null, true)
