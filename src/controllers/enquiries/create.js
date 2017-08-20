@@ -40,7 +40,7 @@ module.exports = (request, reply) => {
     })
     .then(foundProduct => {
       if (foundProduct) {
-          return sendEmail(foundProduct)
+        return sendEmail(foundProduct)
       }
       reply(Boom.notFound('Could not find Product'))
     })
