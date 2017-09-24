@@ -1,5 +1,7 @@
 # Readme
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/zerojargon/eras-api.svg)](https://greenkeeper.io/)
+
 ## What is this?
 The API designed to front the product library for Eras of Style. A simple CRUD API with products, categories and images.
 For protected routes, it uses JWT authentication.
