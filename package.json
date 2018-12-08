@@ -7,7 +7,9 @@
     "lint": "eslint ./src",
     "start": "node ./index.js",
     "start:dev": "nodemon ./index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "author": "",
   "license": "ISC",
@@ -26,8 +28,9 @@
     "jsonwebtoken": "^7.4.3",
     "mailgun-js": "^0.13.1",
     "mysql2": "^1.4.1",
-    "sequelize": "^4.6.0",
-    "sharp": "^0.18.2"
+    "sequelize": "^4.17.2",
+    "sharp": "^0.18.2",
+    "snyk": "^1.116.2"
   },
   "devDependencies": {
     "eslint": "^4.5.0",
@@ -37,5 +40,6 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "nodemon": "^1.11.0"
-  }
+  },
+  "snyk": true
 }
